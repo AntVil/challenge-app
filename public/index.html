@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#000000">
+    <meta name="theme-color" content="#000000" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <meta name="description" content="challenge-app">
+
+    <title>challenge-app</title>
+
+    <link rel="manifest" href="./manifest.json">
+    <link rel="icon" type="image/svg" href="./icons/icon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+    <link rel="apple-touch-startup-image" href="./icons/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
+    <link rel="apple-touch-startup-image" href="./icons/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" />
+    <link rel="apple-touch-startup-image" href="./icons/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" />
+    <link rel="apple-touch-startup-image" href="./icons/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" />
+    <link rel="apple-touch-startup-image" href="./icons/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" />
+    <link rel="apple-touch-startup-image" href="./icons/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" />
+    <link rel="apple-touch-startup-image" href="./icons/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" />
+    <link rel="apple-touch-startup-image" href="./icons/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" />
+    <link rel="apple-touch-startup-image" href="./icons/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" />
+    <link rel="apple-touch-startup-image" href="./icons/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" />
+
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/header.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/footer.css">
+
+    <script src="./scripts/index.js"></script>
+</head>
+<body>
+    <input id="challenge-setup-done" type="checkbox" />
+    <input id="challenge-finish-popup-toggle" type="checkbox" disabled />
+
+    <header>
+        <form onsubmit="submitSetup();return false">
+            <h1>setup</h1>
+            <input id="team-name" placeholder="team name" minlength="3" required />
+            <input id="team-location" placeholder="location" type="number" inputmode="numeric" required  />
+            <button>submit</button>
+        </form>
+    </header>
+
+    <main>
+        <div>
+            <label for="challenge-setup-done"></label>
+            <h1>challenge-app</h1>
+        </div>
+        <section id="challenge-text"></section>
+        <label for="challenge-finish-popup-toggle" tabindex="0">finish</label>
+    </main>
+    
+    <footer>
+        <form onsubmit="finishChallenge();return false">
+            <h1>finish challenge?</h1>
+            <label for="challenge-finish-popup-toggle" tabindex="0">cancel</label>
+            <button>finish</button>
+        </form>
+    </footer>
+</body>
+</html>

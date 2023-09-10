@@ -1,0 +1,36 @@
+#challenge-finish-popup-toggle:not(:checked)~footer{
+    display: none;
+}
+
+footer{
+    position: absolute;
+    inset: 0;
+    background-color: #000A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer form{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 15px;
+    background-color: var(--theme-color-3);
+    width: 90%;
+    max-width: 370px;
+}
+
+footer h1{
+    font-size: 20px;
+    grid-column: 1 / span 2;
+    text-align: center;
+}
+
+footer label, footer button{
+    text-align: center;
+    background-color: var(--theme-color-2);
+    border: 1px solid var(--theme-color-4);
+    border-radius: 5px;
+}
