@@ -40,7 +40,7 @@
         <form onsubmit="submitSetup();return false">
             <h1>setup</h1>
             <input id="team-name" placeholder="team name" minlength="3" required />
-            <input id="team-location" placeholder="location" type="number" inputmode="numeric" required  />
+            <input id="team-location" placeholder="location" type="text" pattern="\w\d" required  />
             <button>submit</button>
         </form>
     </header>
@@ -51,6 +51,7 @@
             <h1>challenge-app</h1>
         </div>
         <section id="challenge-text"></section>
+        <label for="challenge-setup-done">Aufgeben</label>
         <label for="challenge-finish-popup-toggle" tabindex="0">finish</label>
     </main>
     

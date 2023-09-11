@@ -66,11 +66,16 @@ main section:empty::after{
 
 main>label{
     text-align: center;
-    background-color: var(--theme-color-2);
-    border: 1px solid var(--theme-color-4);
+    background-color: var(--theme-color-4);
+    border: 1px solid var(--theme-color-1);
+    color: var(--theme-color-0);
     border-radius: 5px;
 }
 
 #challenge-finish-popup-toggle:disabled~main label{
     filter: grayscale(100%);
+}
+
+main>[for = "challenge-setup-done"]{
+    background-color: red;
 }
