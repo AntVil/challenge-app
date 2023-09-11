@@ -4,22 +4,24 @@ const app = express();
 
 const PORT = 8080;
 
-class Challenge{
-    constructor(fileName) {
-        this.locationId = parseInt(fileName.split(".")[0]);
-        this.text = fs.readFileSync(`./challenges/${fileName}`, { encoding: "utf-8" });
-    }
-}
-
-let challenges = fs.readdirSync("./challenges").map(fileName => new Challenge(fileName));
+let challenges = fs.readdirSync("./challenges");
 
 app.use(express.static("public"));
+app.use(express.json());
 
-app.get("/challenge", (req, res) => {
-    res.send(JSON.stringify(challenges[Math.floor(Math.random() * challenges.length)]))
+app.post("/load", (req, res) => {
+    let { teamName, teamLocation } = req.body;
+    console.log(teamName, teamLocation);
+    res.send(`challenge for ${teamName} at ${teamLocation}`);
+});
+
+app.post("/complete", (req, res) => {
+    let { teamName, teamLocation } = req.body;
+    console.log(teamName, teamLocation);
+    res.send(`challenge for ${teamName} at ${teamLocation}`);
 });
 
 app.listen(PORT, () => {
     console.log(challenges)
-  console.log(`listening on port ${PORT}`)
+    console.log(`listening on port ${PORT}`)
 });

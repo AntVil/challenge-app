@@ -1,22 +1,25 @@
-#challenge-setup-done:checked~header{
-    position: absolute;
-    transform: translate(-100%, 0);
+#challenge-setup-done:checked~header {
+    left: -100%;
 }
 
-header{
+header {
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     height: 100%;
     z-index: 1;
+    left: 50%;
+    transform: translate(-50%, 0);
 }
 
-header *{
+header * {
     text-align: center;
     width: 100%;
 }
 
-header>form{
+header>form {
     display: grid;
     gap: 15px;
     padding: 15px;
@@ -26,22 +29,26 @@ header>form{
     background-color: var(--theme-color-3);
 }
 
-header h1{
+header h1 {
     font-size: 30px;
 }
 
-header input{
+header input {
     background-color: transparent;
     border: 1px solid var(--theme-color-0);
     border-radius: 5px;
 }
 
-header button{
+header input:disabled {
+    border: none;
+}
+
+header button {
     background-color: var(--theme-color-2);
     border: 1px solid var(--theme-color-0);
     border-radius: 5px;
 }
 
-header button:disabled{
+header button:disabled {
     filter: grayscale(100%);
 }

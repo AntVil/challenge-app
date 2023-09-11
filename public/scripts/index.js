@@ -1,3 +1,5 @@
+let teamName;
+let teamLocation;
 let challengeSetupDone;
 let challengeFinishPopupToggle;
 let challengeText;
@@ -7,6 +9,8 @@ window.onload = () => {
         navigator.serviceWorker.register("./service-worker.js");
     }
 
+    teamName = document.getElementById("team-name");
+    teamLocation = document.getElementById("team-location");
     challengeSetupDone = document.getElementById("challenge-setup-done");
     challengeFinishPopupToggle = document.getElementById("challenge-finish-popup-toggle");
     challengeText = document.getElementById("challenge-text");
@@ -19,21 +23,40 @@ document.addEventListener("keydown", event => {
     }
 });
 
-async function submitSetup(){
+async function submitSetup() {
+    teamName.disabled = true;
     challengeSetupDone.checked = true;
 
-    loadChallenge();
-}
+    const text = await (await fetch(
+        "./load",
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                "teamName": teamName.value,
+                "teamLocation": teamLocation.value
+            })
+        }
+    )).text();
 
-async function loadChallenge(){
-    let { locationId, text } = await (await fetch("./challenge")).json();
-    
     challengeText.innerText = text;
     challengeFinishPopupToggle.disabled = false;
     challengeFinishPopupToggle.checked = false;
 }
 
-async function finishChallenge(){
+async function finishChallenge() {
+    await fetch(
+        "./complete",
+        {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                "teamName": teamName.value,
+                "teamLocation": teamLocation.value
+            })
+        }
+    )
     challengeFinishPopupToggle.disabled = true;
-    loadChallenge();
+    challengeFinishPopupToggle.checked = false;
+    challengeSetupDone.checked = false;
 }

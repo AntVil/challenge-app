@@ -1,8 +1,8 @@
-#challenge-finish-popup-toggle:not(:checked)~footer{
+#challenge-finish-popup-toggle:not(:checked)~footer {
     display: none;
 }
 
-footer{
+footer {
     position: absolute;
     inset: 0;
     background-color: #000A;
@@ -11,7 +11,7 @@ footer{
     align-items: center;
 }
 
-footer form{
+footer form {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 15px;
@@ -22,15 +22,15 @@ footer form{
     max-width: 370px;
 }
 
-footer h1{
+footer h1 {
     font-size: 20px;
     grid-column: 1 / span 2;
     text-align: center;
 }
 
-footer label, footer button{
+footer label, footer button {
     text-align: center;
     background-color: var(--theme-color-2);
-    border: 1px solid var(--theme-color-4);
+    border: 1px solid var(--theme-color-0);
     border-radius: 5px;
 }
