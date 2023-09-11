@@ -1,6 +1,6 @@
 {
-	"name": "challenge-app",
-	"short_name": "challenge-app",
+	"name": "Stadtralley 2023",
+	"short_name": "Stadtralley",
 	"icons": [
 		{
 			"src": "./icons/icon-512x512.png",
