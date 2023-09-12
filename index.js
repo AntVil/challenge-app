@@ -18,7 +18,6 @@ app.post("/load", (req, res) => {
     };
 
     score = calcScore(teamName)
-    console.log(`hallo`)
     
     if (!obj[teamName].includes(teamLocation)) {
         res.send(score + `\n` + fs.readFileSync(`challenges/${teamLocation}/${stringToHash(teamName, teamLocation)}.txt`));
