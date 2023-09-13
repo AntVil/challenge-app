@@ -27,10 +27,10 @@ aside label {
     width: 30px;
     height: 30px;
     background-color: var(--theme-color-2);
-    -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
     mask-position: center;
+    -webkit-mask-position: center;
 }
 
 aside button {

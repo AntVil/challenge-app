@@ -27,6 +27,7 @@
 }
 
 body {
+    position: fixed;
     height: 100svh;
     overflow: hidden;
     background-color: var(--theme-color-1);

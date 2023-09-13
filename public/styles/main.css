@@ -28,10 +28,10 @@ main div label {
     height: 30px;
     mask-image: url("./images/arrow-left.svg");
     -webkit-mask-image: url("./images/arrow-left.svg");
-    -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
-    -webkit-mask-position: center;
+    -webkit-mask-repeat: no-repeat;
     mask-position: center;
+    -webkit-mask-position: center;
 }
 
 main h1 {
