@@ -27,7 +27,7 @@ async function submitSetup() {
     teamName.disabled = true;
     challengeSetupDone.checked = true;
 
-    const text = await (await fetch(
+    const response = await (await fetch(
         "./load",
         {
             method: "POST",
@@ -37,9 +37,15 @@ async function submitSetup() {
                 "teamLocation": teamLocation.value
             })
         }
-    )).text();
+    )).json();
 
-    challengeText.innerText = text;
+    if (response.error) {
+        console.log(response.error);
+        // TODO: handle error
+        return;
+    }
+
+    challengeText.innerText = response.text;
     challengeFinishPopupToggle.disabled = false;
     challengeFinishPopupToggle.checked = false;
 }
