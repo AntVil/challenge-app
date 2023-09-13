@@ -1,15 +1,16 @@
-#challenge-setup-done:not(:checked)~main {
-    display: none;
+#main-screen:not(:checked)~main {
+    transform: translate(100%, 0);
 }
 
 main {
     display: grid;
     grid-template-rows: auto 1fr auto;
     gap: 15px;
+    width: 100%;
     height: 100%;
     padding: 30px 15px;
-    max-width: 400px;
     margin: auto;
+    background-color: var(--theme-color-3);
 }
 
 main div {
@@ -24,8 +25,8 @@ main div label {
     background-color: var(--theme-color-2);
     width: 30px;
     height: 30px;
-    mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 1L3 4L6 7' stroke='%23000' fill='none' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E");
-    -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 8 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 1L3 4L6 7' stroke='%23000' fill='none' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E");
+    mask-image: url("./images/arrow-left.svg");
+    -webkit-mask-image: url("./images/arrow-left.svg");
 }
 
 main h1 {
@@ -77,6 +78,6 @@ main>label {
     filter: grayscale(100%);
 }
 
-main>[for="challenge-setup-done"] {
+main>[for="setup-screen"] {
     background-color: red;
 }

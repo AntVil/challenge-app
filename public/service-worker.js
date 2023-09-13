@@ -6,7 +6,11 @@ const filesToCache = [
     "/styles/header.css",
     "/styles/main.css",
     "/styles/footer.css",
-    "/scripts/index.js"
+    "/styles/images/arrow-left.svg",
+    "/styles/images/arrow-right.svg",
+    "/styles/images/refresh.svg",
+    "/scripts/index.js",
+    "/locations"
 ];
 
 self.addEventListener("install", (event) => {

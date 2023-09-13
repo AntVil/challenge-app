@@ -1,19 +1,37 @@
 let teamName;
 let teamLocation;
-let challengeSetupDone;
+
+let setupScreen;
+let mainScreen;
+let leaderboardScreen;
+
 let challengeFinishPopupToggle;
+
 let challengeText;
 let leaderboardTable;
 
-window.onload = () => {
+window.onload = async () => {
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./service-worker.js");
     }
 
+    let locations = await (await fetch("/locations")).json();
+
     teamName = document.getElementById("team-name");
     teamLocation = document.getElementById("team-location");
-    challengeSetupDone = document.getElementById("challenge-setup-done");
-    challengeFinishPopupToggle = document.getElementById("challenge-finish-popup-toggle");
+
+    for (let location of locations) {
+        let option = document.createElement("option");
+        option.innerText = location.toUpperCase();
+        option.value = location;
+        teamLocation.appendChild(option);
+    }
+
+    setupScreen = document.getElementById("setup-screen");
+    mainScreen = document.getElementById("main-screen");
+    leaderboardScreen = document.getElementById("leaderboard-screen");
+
+    challengeFinishPopupToggle = document.getElementById("challenge-finish-popup-toggle")
     challengeText = document.getElementById("challenge-text");
     leaderboardTable = document.getElementById("leaderboard-table");
 }
@@ -25,9 +43,17 @@ document.addEventListener("keydown", event => {
     }
 });
 
+function getLocation() {
+    return teamLocation.value.trim().toLowerCase();
+}
+
+function getName() {
+    return teamName.value.trim().toLowerCase();
+}
+
 async function submitSetup() {
     teamName.disabled = true;
-    challengeSetupDone.checked = true;
+    mainScreen.checked = true;
 
     const response = await (await fetch(
         "./load",
@@ -59,50 +85,48 @@ async function finishChallenge() {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                "teamName": teamName.value,
-                "teamLocation": teamLocation.value
+                "teamName": getName(),
+                "teamLocation": getLocation()
             })
         }
     )
     challengeFinishPopupToggle.disabled = true;
     challengeFinishPopupToggle.checked = false;
-    challengeSetupDone.checked = false;
+    setupScreen.checked = true;
 }
 
-function sortLeaderboard(table){
-    let sorting = []
-    for(let name of Object.keys(table)){
-        sorting.push({
+async function getLeaderboard() {
+    let table = await (await fetch("./scores")).json();
+
+    let list = []
+    for (let name of Object.keys(table)) {
+        list.push({
             "teamName": name,
             "score": table[name]
         })
     }
-    sorting.sort((a, b) => b.score - a.score)
-    return sorting
-}  
+
+    return list.sort((a, b) => b.score - a.score);
+}
 
 async function renderLeaderboard() {
+    let leaderBoard = await getLeaderboard();
+    let name = teamName.value.trim().toLowerCase()
 
-    leaderboardTable.innerHTML = ""
-    let tableJSON = await (await fetch(
-        "./scores",
-        )).json()
-    tableJSON = sortLeaderboard(tableJSON)
-        
-    for(let i = 0; i < tableJSON.length; i++){
-        let listedname = document.createElement("span")
-        listedname.innerText = tableJSON[i].teamName
+    leaderboardTable.innerHTML = "";
+    for (let i = 0; i < leaderBoard.length; i++) {
+        let entry = document.createElement("li");
+        let entryName = document.createElement("span");
+        let entryScore = document.createElement("span");
+        entryName.innerText = leaderBoard[i].teamName;
+        entryScore.innerText = leaderBoard[i].score;
 
-        let listedscore = document.createElement("span")
-        listedscore.innerText = tableJSON[i].score
-
-        if(teamName.value.trim().toLowerCase() === tableJSON[i].teamName){
-            listedname.style.backgroundColor = 'var(--theme-color-4)';
-            listedscore.style.backgroundColor = 'var(--theme-color-4)';
+        if (leaderBoard[i].teamName === name) {
+            entry.style.backgroundColor = "var(--theme-color-4)";
         }
 
-        leaderboardTable.appendChild(listedname)
-        leaderboardTable.appendChild(listedscore)
+        entry.appendChild(entryName);
+        entry.appendChild(entryScore);
+        leaderboardTable.appendChild(entry);
     }
-
 }

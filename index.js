@@ -1,4 +1,4 @@
-const fs = require("fs")
+const fs = require("fs");
 const express = require("express");
 const app = express();
 
@@ -8,22 +8,20 @@ app.use(express.static("public"));
 app.use(express.json());
 
 let teamTable = {};
-let locations = fs.readdirSync("challenges");
+let locations = fs.readdirSync("challenges").sort();
 
 app.post("/load", (req, res) => {
     let [teamName, teamLocation] = getTeam(req);
 
     if (!locations.includes(teamLocation)) {
         res.send(
-            JSON.stringify(
-                { "error": "location does not exist" }
-            )
+            JSON.stringify({ "error": "location does not exist" })
         );
         return;
     }
 
     if (!(teamName in teamTable)) {
-        teamTable[teamName] = []
+        teamTable[teamName] = [];
     }
 
     if (!teamTable[teamName].includes(teamLocation)) {
@@ -37,10 +35,8 @@ app.post("/load", (req, res) => {
         );
     } else {
         res.send(
-            JSON.stringify(
-                { "error": "challenge already done" }
-            )
-        )
+            JSON.stringify({ "error": "challenge already done" })
+        );
     }
 });
 
@@ -60,14 +56,17 @@ app.post("/complete", (req, res) => {
     }
 });
 
-app.get("/scores", (req, res) =>{
-    let response = {}
-    for( let teamName of Object.keys(teamTable)){
-        response[teamName] = calcScore(teamName)
+app.get("/locations", (req, res) => {
+    res.send(locations);
+});
 
+app.get("/scores", (req, res) => {
+    let response = {};
+    for (let teamName of Object.keys(teamTable)) {
+        response[teamName] = calculateScore(teamName);
     }
-    res.send(JSON.stringify(response))
-})
+    res.send(JSON.stringify(response));
+});
 
 app.listen(PORT, () => {
     console.log(`listening on port ${PORT}`)
@@ -77,7 +76,7 @@ function getTeam(req) {
     let { teamName, teamLocation } = req.body;
     teamName = teamName.toLowerCase().trim();
     teamLocation = teamLocation.toLowerCase().trim();
-    return [teamName, teamLocation]
+    return [teamName, teamLocation];
 }
 
 function getChallenge(teamName, teamLocation) {
@@ -90,15 +89,14 @@ function getChallenge(teamName, teamLocation) {
 
     hash = hash % fs.readdirSync(`challenges/${teamLocation}`).length;
 
-    return fs.readFileSync(`challenges/${teamLocation}/${hash}.txt`, { encoding: "utf-8" })
+    return fs.readFileSync(`challenges/${teamLocation}/${hash}.txt`, { encoding: "utf-8" });
 
 }
 
-
-function calcScore(teamName){
+function calculateScore(teamName) {
     score = 0
     for (let i = 0; i < teamTable[teamName].length; i++) {
         score = score + parseInt(teamTable[teamName][i].slice(1))
-      }
+    }
     return score
 }

@@ -34,38 +34,39 @@
     <script src="./scripts/index.js"></script>
 </head>
 <body>
-    <input id="leaderboard" type="checkbox" />
-    <input id="challenge-setup-done" type="checkbox" />
-    <input id="challenge-finish-popup-toggle" type="checkbox" disabled />
+    <input id="setup-screen" type="radio" name="screen" autocomplete="off" checked />
+    <input id="main-screen" type="radio" name="screen" autocomplete="off" />
+    <input id="leaderboard-screen" type="radio" name="screen" autocomplete="off" />
+    <input id="challenge-finish-popup-toggle" type="checkbox" autocomplete="off" disabled />
 
     <header>
         <form onsubmit="submitSetup();return false">
             <h1>Eingabe</h1>
-            <input id="team-name" placeholder="Team Name" minlength="3" pattern="[a-zA-Z]*" required />
-            <input id="team-location" placeholder="Standort" pattern="[a-zA-Z][0-9]" required />
+            <input id="team-name" placeholder="Team Name" minlength="3" pattern="[a-zA-Z_\-]*" required />
+            <select id="team-location" autocomplete="off" required>
+                <option hidden disabled selected value>Standort</option>
+            </select>
             <button>Bestätigen</button>
-            <span></span><span></span>
-            <label for="leaderboard" onclick="renderLeaderboard()">Leaderboard</label>
+            <label for="leaderboard-screen" onclick="renderLeaderboard()">Leaderboard</label>
         </form>
     </header>
 
     <aside>
         <div>
-            <span></span>
+            <button onclick="renderLeaderboard()"></button>
             <h1>Leaderboard</h1>
-            <label for="leaderboard"></label>
+            <label for="setup-screen"></label>
         </div>
-        <section id = "leaderboard-table">
-        </section>
+        <ol id="leaderboard-table"></ol>
     </aside>
 
     <main>
         <div>
-            <label for="challenge-setup-done"></label>
+            <label for="setup-screen"></label>
             <h1>Challenge</h1>
         </div>
         <section id="challenge-text"></section>
-        <label for="challenge-setup-done">Aufgeben</label>
+        <label for="setup-screen">Aufgeben</label>
         <label for="challenge-finish-popup-toggle" tabindex="0">Fertig</label>
     </main>
     
