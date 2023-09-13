@@ -46,9 +46,9 @@ aside label {
 aside ol {
     display: grid;
     grid-auto-rows: min-content;
-    overflow-y: auto;
     gap: 20px;
     padding: 0;
+    overflow-y: auto;
     background-color: var(--theme-color-3);
     list-style: none;
 }
@@ -56,7 +56,7 @@ aside ol {
 aside li {
     display: grid;
     grid-template-columns: 1fr auto;
-    background-color: var(--theme-color-2);
     padding: 10px;
+    background-color: var(--theme-color-2);
     border-radius: 10px;
 }

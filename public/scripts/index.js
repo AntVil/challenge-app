@@ -10,30 +10,24 @@ let challengeFinishPopupToggle;
 let challengeText;
 let leaderboardTable;
 
-window.onload = async () => {
+window.onload = () => {
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./service-worker.js");
     }
 
-    let locations = await (await fetch("/locations")).json();
-
     teamName = document.getElementById("team-name");
     teamLocation = document.getElementById("team-location");
-
-    for (let location of locations) {
-        let option = document.createElement("option");
-        option.innerText = location.toUpperCase();
-        option.value = location;
-        teamLocation.appendChild(option);
-    }
 
     setupScreen = document.getElementById("setup-screen");
     mainScreen = document.getElementById("main-screen");
     leaderboardScreen = document.getElementById("leaderboard-screen");
 
-    challengeFinishPopupToggle = document.getElementById("challenge-finish-popup-toggle")
+    challengeFinishPopupToggle = document.getElementById("challenge-finish-popup-toggle");
+
     challengeText = document.getElementById("challenge-text");
     leaderboardTable = document.getElementById("leaderboard-table");
+
+    setupLocationOptions();
 }
 
 document.addEventListener("keydown", event => {
@@ -49,6 +43,17 @@ function getLocation() {
 
 function getName() {
     return teamName.value.trim().toLowerCase();
+}
+
+async function setupLocationOptions(){
+    let locations = await (await fetch("/locations")).json();
+
+    for (let location of locations) {
+        let option = document.createElement("option");
+        option.innerText = location.toUpperCase();
+        option.value = location;
+        teamLocation.appendChild(option);
+    }
 }
 
 async function submitSetup() {
@@ -89,7 +94,7 @@ async function finishChallenge() {
                 "teamLocation": getLocation()
             })
         }
-    )
+    );
     challengeFinishPopupToggle.disabled = true;
     challengeFinishPopupToggle.checked = false;
     setupScreen.checked = true;
@@ -103,7 +108,7 @@ async function getLeaderboard() {
         list.push({
             "teamName": name,
             "score": table[name]
-        })
+        });
     }
 
     return list.sort((a, b) => b.score - a.score);
@@ -111,7 +116,7 @@ async function getLeaderboard() {
 
 async function renderLeaderboard() {
     let leaderBoard = await getLeaderboard();
-    let name = teamName.value.trim().toLowerCase()
+    let name = getName();
 
     leaderboardTable.innerHTML = "";
     for (let i = 0; i < leaderBoard.length; i++) {

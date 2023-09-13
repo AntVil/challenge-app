@@ -8,7 +8,6 @@ header {
 
 header * {
     text-align: center;
-    width: 100%;
 }
 
 header>form {
@@ -17,10 +16,10 @@ header>form {
     grid-auto-rows: 1fr;
     gap: 15px;
     padding: 15px;
-    border-radius: 15px;
     max-width: 400px;
     width: 90%;
     background-color: var(--theme-color-3);
+    border-radius: 15px;
 }
 
 header h1 {
@@ -28,29 +27,23 @@ header h1 {
 }
 
 header input,
-header select {
+header select,
+header button,
+header label {
     background-color: transparent;
     border: 1px solid var(--theme-color-0);
     border-radius: 5px;
+}
+
+header button,
+header label {
+    background-color: var(--theme-color-2);
 }
 
 header input:disabled {
     border: none;
 }
 
-header button {
-    background-color: var(--theme-color-2);
-    border: 1px solid var(--theme-color-0);
-    border-radius: 5px;
-}
-
 header button:disabled {
     filter: grayscale(100%);
-}
-
-
-header label {
-    background-color: var(--theme-color-2);
-    border: 1px solid var(--theme-color-0);
-    border-radius: 5px;
 }
