@@ -1,5 +1,6 @@
 #main-screen:not(:checked)~main {
     transform: translate(100%, 0);
+    opacity: 0;
 }
 
 main {
@@ -27,6 +28,10 @@ main div label {
     height: 30px;
     mask-image: url("./images/arrow-left.svg");
     -webkit-mask-image: url("./images/arrow-left.svg");
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
 }
 
 main h1 {

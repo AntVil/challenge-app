@@ -28,6 +28,7 @@
 
 body {
     height: 100svh;
+    overflow: hidden;
     background-color: var(--theme-color-1);
 }
 
@@ -54,6 +55,8 @@ select {
     box-sizing: border-box;
     position: relative;
     padding-left: 5px;
+    text-align: center;
+    text-align-last: center;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke-width='1.5' stroke='%230b1619' stroke-linecap='round' d='M2.4 6L12 18L21.6 6'/%3E%3C/svg%3E") no-repeat right 13px center/20px, linear-gradient(to left, var(--theme-color-2) 46px, transparent 46px);
 }
 
@@ -72,7 +75,7 @@ select:has(:disabled:checked) {
 }
 
 body>* {
-    position: absolute;
+    position: fixed;
 }
 
 @media (prefers-reduced-motion) {
