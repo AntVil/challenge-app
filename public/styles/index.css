@@ -3,7 +3,7 @@
     --theme-color-1: #dcebef;
     --theme-color-2: #5187b3;
     --theme-color-3: #bddee6;
-    --theme-color-4: #426c94;
+    --theme-color-4: #219a77;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -12,7 +12,7 @@
         --theme-color-1: #0b1619;
         --theme-color-2: #7c326c;
         --theme-color-3: #102327;
-        --theme-color-4: #50aa19;
+        --theme-color-4: #3f8613;
     }
 }
 
@@ -44,7 +44,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
     -webkit-background-clip: text;
-    -webkit-text-fill-color: #ffffff;
+    -webkit-text-fill-color: var(--theme-color-0);
     transition: background-color 5000s ease-in-out 0s;
     box-shadow: inset 0 0 20px 20px #23232329;
 }

@@ -1,3 +1,84 @@
+//js
+
+const fs = require("fs")
+const express = require("express");
+const app = express();
+let obj = {};
+
+const PORT = 8080;
+
+let challenges = fs.readdirSync("./challenges");
+
+app.use(express.static("public"));
+app.use(express.json());
+
+app.post("/load", (req, res) => {
+    let { teamName, teamLocation } = req.body;
+    if (!(teamName in obj)) {
+        obj[teamName] = []
+    };
+
+    score = calcScore(teamName)
+    
+    if (!obj[teamName].includes(teamLocation)) {
+        res.send(`Deine Punktzahl: ` + score + ` Punkte` + `\n` + `\n` + `\n` + `\n` + `Belohnung: ` + teamLocation.slice(1) + ` Punkte` + `\n` + `\n` + fs.readFileSync(`challenges/${teamLocation}/${stringToHash(teamName, teamLocation)}.txt`));
+    }
+    else {
+        res.send(`Deine Punktzahl: ` + score + `\n` + `\n` + `Bitte gebt einen neuen Standort ein`)
+    }
+});
+
+app.post("/complete", (req, res) => {
+    let { teamName, teamLocation } = req.body;
+    if (!obj[teamName].includes(teamLocation)) {
+        obj[teamName].push(teamLocation);
+    }
+    res.send(`challenge for ${teamName} at ${teamLocation}`);
+});
+
+app.listen(PORT, () => {
+    console.log(`listening on port ${PORT}`)
+});
+
+function stringToHash(string, teamLocation) {
+
+    let hash = 0;
+    string = string +  teamLocation
+
+    if (string.length == 0) return hash;
+
+    for (i = 0; i < string.length; i++) {
+        hash += string.charCodeAt(i);
+
+    }
+
+    hash = hash % fs.readdirSync(`challenges/${teamLocation}`).length;
+    return hash;
+}
+
+function calcScore(teamName){
+    score = 0
+    for (let i = 0; i < obj[teamName].length; i++) {
+        score = score + parseInt(obj[teamName][i].slice(1))
+      }
+    return score
+}
+
+
+
+
+
+
+
+
+
+
+
+//html
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,42 +108,28 @@
 
     <link rel="stylesheet" href="./styles/index.css">
     <link rel="stylesheet" href="./styles/header.css">
-    <link rel="stylesheet" href="./styles/aside.css">
     <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/footer.css">
 
     <script src="./scripts/index.js"></script>
 </head>
 <body>
-    <input id="leaderboard" type="checkbox" />
     <input id="challenge-setup-done" type="checkbox" />
     <input id="challenge-finish-popup-toggle" type="checkbox" disabled />
 
     <header>
         <form onsubmit="submitSetup();return false">
             <h1>Eingabe</h1>
-            <input id="team-name" placeholder="Team Name" minlength="3" pattern="[a-zA-Z]*" required />
-            <input id="team-location" placeholder="Standort" pattern="[a-zA-Z][0-9]" required />
+            <input id="team-name" placeholder="Team Name" minlength="3" pattern="[A-z]*" required />
+            <input id="team-location" placeholder="Standort" pattern="[a-z][0-9]" required />
             <button>Bestätigen</button>
-            <span></span><span></span>
-            <label for="leaderboard" onclick="renderLeaderboard()">Leaderboard</label>
         </form>
     </header>
-
-    <aside>
-        <div>
-            <span></span>
-            <h1>Leaderboard</h1>
-            <label for="leaderboard"></label>
-        </div>
-        <section id = "leaderboard-table">
-        </section>
-    </aside>
 
     <main>
         <div>
             <label for="challenge-setup-done"></label>
-            <h1>Challenge</h1>
+            <h1>Stadtralley 2023</h1>
         </div>
         <section id="challenge-text"></section>
         <label for="challenge-setup-done">Aufgeben</label>

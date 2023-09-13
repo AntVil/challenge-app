@@ -60,6 +60,15 @@ app.post("/complete", (req, res) => {
     }
 });
 
+app.get("/scores", (req, res) =>{
+    let response = {}
+    for( let teamName of Object.keys(teamTable)){
+        response[teamName] = calcScore(teamName)
+
+    }
+    res.send(JSON.stringify(response))
+})
+
 app.listen(PORT, () => {
     console.log(`listening on port ${PORT}`)
 });
@@ -88,8 +97,8 @@ function getChallenge(teamName, teamLocation) {
 
 function calcScore(teamName){
     score = 0
-    for (let i = 0; i < obj[teamName].length; i++) {
-        score = score + parseInt(obj[teamName][i].slice(1))
+    for (let i = 0; i < teamTable[teamName].length; i++) {
+        score = score + parseInt(teamTable[teamName][i].slice(1))
       }
     return score
 }

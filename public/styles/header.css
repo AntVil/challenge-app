@@ -52,3 +52,10 @@ header button {
 header button:disabled {
     filter: grayscale(100%);
 }
+
+
+header label {
+    background-color: var(--theme-color-2);
+    border: 1px solid var(--theme-color-0);
+    border-radius: 5px;
+}
