@@ -38,6 +38,21 @@ aside button {
     -webkit-mask-image: url("./images/refresh.svg");
 }
 
+aside button:hover{
+    animation: loadingSpinner 0.5s linear;
+}
+
+@keyframes loadingSpinner {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
 aside label {
     mask-image: url("./images/arrow-right.svg");
     -webkit-mask-image: url("./images/arrow-right.svg");

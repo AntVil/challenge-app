@@ -42,7 +42,7 @@
     <header>
         <form onsubmit="submitSetup();return false">
             <h1>Eingabe</h1>
-            <input id="team-name" placeholder="Team Name" minlength="3" pattern="[a-zA-Z_\-]*" required />
+            <input id="team-name" placeholder="Team Name" minlength="3" pattern="[a-zA-Z_\-\d]*" required />
             <select id="team-location" autocomplete="off" required>
                 <option hidden disabled selected value>Standort</option>
             </select>

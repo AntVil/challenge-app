@@ -79,6 +79,7 @@ main>label {
     border-radius: 5px;
     color: var(--theme-color-0);
     text-align: center;
+    padding: 1px;
 }
 
 #challenge-finish-popup-toggle:disabled~main>label {
