@@ -45,7 +45,7 @@ function getName() {
     return teamName.value.trim().toLowerCase();
 }
 
-async function setupLocationOptions(){
+async function setupLocationOptions() {
     let locations = await (await fetch("/locations")).json();
 
     for (let location of locations) {
@@ -75,7 +75,7 @@ async function submitSetup() {
     if (response.error) {
         challengeText.innerText = "Challenge bereits abgeschlossen";
         challengeFinishPopupToggle.disabled = true;
-    }else{
+    } else {
         challengeText.innerText = response.text;
         challengeFinishPopupToggle.disabled = false;
     }
