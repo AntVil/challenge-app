@@ -93,3 +93,11 @@ main>[for="setup-screen"] {
 main>[for="challenge-finish-popup-toggle"] {
     background-color: var(--theme-color-4);
 }
+
+#challenge-finish-popup-toggle:disabled~main section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    color: var(--theme-color-2);
+}
