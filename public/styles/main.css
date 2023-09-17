@@ -7,7 +7,7 @@ main {
     display: grid;
     grid-template-rows: auto 1fr auto;
     gap: 15px;
-    padding: 30px 15px;
+    padding: 25px;
     width: 100%;
     height: 100%;
     background-color: var(--theme-color-3);
@@ -75,17 +75,21 @@ main section:empty {
 
 main>label {
     background-color: var(--theme-color-4);
-    border: 1px solid var(--theme-color-1);
+    border: 1px solid var(--theme-color-0);
     border-radius: 5px;
     color: var(--theme-color-0);
     text-align: center;
     padding: 1px;
 }
 
-#challenge-finish-popup-toggle:disabled~main>label {
+#challenge-finish-popup-toggle:disabled~main>[for="challenge-finish-popup-toggle"] {
     filter: grayscale(100%);
 }
 
 main>[for="setup-screen"] {
-    background-color: red;
+    background-color: var(--theme-color-2);
+}
+
+main>[for="challenge-finish-popup-toggle"] {
+    background-color: var(--theme-color-4);
 }

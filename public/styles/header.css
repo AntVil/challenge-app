@@ -30,6 +30,9 @@ header input,
 header select,
 header button,
 header label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: transparent;
     border: 1px solid var(--theme-color-0);
     border-radius: 5px;
@@ -41,7 +44,7 @@ header label {
 }
 
 header input:disabled {
-    border: none;
+    border-color: transparent;
 }
 
 header button:disabled {

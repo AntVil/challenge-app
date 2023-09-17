@@ -73,14 +73,12 @@ async function submitSetup() {
     )).json();
 
     if (response.error) {
-        console.log(response.error);
-        // TODO: handle error
-        return;
+        challengeText.innerText = "Challenge bereits abgeschlossen";
+        challengeFinishPopupToggle.disabled = true;
+    }else{
+        challengeText.innerText = response.text;
+        challengeFinishPopupToggle.disabled = false;
     }
-
-    challengeText.innerText = response.text;
-    challengeFinishPopupToggle.disabled = false;
-    challengeFinishPopupToggle.checked = false;
 }
 
 async function finishChallenge() {

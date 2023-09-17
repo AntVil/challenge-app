@@ -47,27 +47,27 @@
                 <option hidden disabled selected value>Standort</option>
             </select>
             <button>Bestätigen</button>
-            <label for="leaderboard-screen" onclick="renderLeaderboard()">Leaderboard</label>
+            <label for="leaderboard-screen" onclick="renderLeaderboard()" tabindex="0">Rangliste</label>
         </form>
     </header>
 
     <aside>
         <div>
             <button onclick="renderLeaderboard()"></button>
-            <h1>Leaderboard</h1>
-            <label for="setup-screen"></label>
+            <h1>Rangliste</h1>
+            <label for="setup-screen" tabindex="0"></label>
         </div>
         <ol id="leaderboard-table"></ol>
     </aside>
 
     <main>
         <div>
-            <label for="setup-screen"></label>
+            <label for="setup-screen" tabindex="0"></label>
             <h1>Challenge</h1>
         </div>
         <section id="challenge-text"></section>
-        <label for="setup-screen">Aufgeben</label>
-        <label for="challenge-finish-popup-toggle" tabindex="0">Fertig</label>
+        <label for="setup-screen" tabindex="0">Herausforderung wechseln</label>
+        <label for="challenge-finish-popup-toggle" tabindex="0">Abschließen</label>
     </main>
     
     <footer>
