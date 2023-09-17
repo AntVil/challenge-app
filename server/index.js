@@ -1,8 +1,9 @@
-
+import fs from "fs";
+import path from "path";
 import express from "express";
 import TeamTable from "./TeamTable.js";
 import LocationManager from "./LocationManager.js";
-import { PORT, PUBLIC_DIRECTORY, CHALLENGE_DIRECTORY } from "./constants.js";
+import { PORT, PUBLIC_DIRECTORY, CHALLENGE_DIRECTORY, LOG_DIRECTORY } from "./constants.js";
 
 const app = express();
 
@@ -69,3 +70,40 @@ function getTeam(req) {
         teamLocation.toLowerCase().trim()
     ];
 }
+
+function saveTeamTable() {
+    const now = new Date();
+    const year = now.getUTCFullYear();
+    const month = (now.getUTCMonth() + 1).toString().padStart(2, '0');
+    const day = now.getUTCDate().toString().padStart(2, '0');
+    const hours = now.getUTCHours().toString().padStart(2, '0');
+    const minutes = now.getUTCMinutes().toString().padStart(2, '0');
+    const seconds = now.getUTCSeconds().toString().padStart(2, '0');
+
+    const time = `${year}-${month}-${day}-${hours}-${minutes}-${seconds}`;
+    fs.writeFileSync(
+        path.join(
+            LOG_DIRECTORY,
+            `log_${time}.json`
+        ),
+        JSON.stringify(teamTable, null, 4)
+    );
+}
+
+process.on('SIGINT', () => {
+    saveTeamTable();
+    console.log("bye.")
+    process.exit(0)
+});
+
+process.on('SIGQUIT', () => {
+    saveTeamTable();
+    console.log("bye.")
+    process.exit(0)
+});
+
+process.on('SIGTERM', () => {
+    saveTeamTable();
+    console.log("bye.")
+    process.exit(0)
+});
