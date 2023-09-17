@@ -1,31 +1,19 @@
-let teamName;
-let teamLocation;
+const teamName = document.getElementById("team-name");
+const teamLocation = document.getElementById("team-location");
 
-let setupScreen;
-let mainScreen;
-let leaderboardScreen;
+const setupScreen = document.getElementById("setup-screen");
+const mainScreen = document.getElementById("main-screen");
+const leaderboardScreen = document.getElementById("leaderboard-screen");
 
-let challengeFinishPopupToggle;
+const challengeFinishPopupToggle = document.getElementById("challenge-finish-popup-toggle");
 
-let challengeText;
-let leaderboardTable;
+const challengeText = document.getElementById("challenge-text");
+const leaderboardTable = document.getElementById("leaderboard-table");
 
 window.onload = () => {
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./service-worker.js");
     }
-
-    teamName = document.getElementById("team-name");
-    teamLocation = document.getElementById("team-location");
-
-    setupScreen = document.getElementById("setup-screen");
-    mainScreen = document.getElementById("main-screen");
-    leaderboardScreen = document.getElementById("leaderboard-screen");
-
-    challengeFinishPopupToggle = document.getElementById("challenge-finish-popup-toggle");
-
-    challengeText = document.getElementById("challenge-text");
-    leaderboardTable = document.getElementById("leaderboard-table");
 
     setupLocationOptions();
 }
@@ -36,6 +24,10 @@ document.addEventListener("keydown", event => {
         document.activeElement.blur();
     }
 });
+
+function cleanTeamName() {
+    teamName.value = getName();
+}
 
 function getLocation() {
     return teamLocation.value.trim().toLowerCase();
@@ -58,8 +50,10 @@ async function setupLocationOptions() {
 
 async function submitSetup() {
     teamName.disabled = true;
+    challengeFinishPopupToggle.disabled = true;
     mainScreen.checked = true;
 
+    challengeText.innerText = "";
     const response = await (await fetch(
         "./load",
         {
@@ -74,7 +68,6 @@ async function submitSetup() {
 
     if (response.error) {
         challengeText.innerText = "Challenge bereits abgeschlossen";
-        challengeFinishPopupToggle.disabled = true;
     } else {
         challengeText.innerText = response.text;
         challengeFinishPopupToggle.disabled = false;
@@ -113,10 +106,16 @@ async function getLeaderboard() {
 }
 
 async function renderLeaderboard() {
-    let leaderBoard = await getLeaderboard();
-    let name = getName();
-
     leaderboardTable.innerHTML = "";
+
+    let leaderBoard = await getLeaderboard();
+
+    if(leaderBoard.length === 0) {
+        leaderboardTable.innerText = "keine Einträge";
+        return;
+    }
+
+    let name = getName();
     for (let i = 0; i < leaderBoard.length; i++) {
         let entry = document.createElement("li");
         let entryName = document.createElement("span");

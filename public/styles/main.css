@@ -51,7 +51,7 @@ main section:empty {
 /* animation during loading */
 @media (prefers-reduced-motion: no-preference) {
     main section:empty::after {
-        content: " ";
+        content: "";
         display: block;
         width: 64px;
         height: 64px;

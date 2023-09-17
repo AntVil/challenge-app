@@ -21,6 +21,10 @@ aside div {
     text-align: center;
 }
 
+aside h1 {
+    font-size: 30px;
+}
+
 aside button,
 aside label {
     display: block;
@@ -66,4 +70,43 @@ aside li {
     padding: 10px;
     background-color: var(--theme-color-2);
     border-radius: 10px;
+}
+
+aside ol:empty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* animation during loading */
+@media (prefers-reduced-motion: no-preference) {
+    aside ol:empty::after {
+        content: "";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid;
+        border-color: var(--theme-color-2) transparent var(--theme-color-2) transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+    }
+
+    @keyframes lds-dual-ring {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+}
+
+aside ol:not(:has(*)) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    color: var(--theme-color-2);
 }
