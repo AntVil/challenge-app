@@ -19,16 +19,11 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("fetch", (event) => {
     event.respondWith(
-        fetch(event.request).then((response) => {
-            let copy = response.clone();
-            caches.open(cacheName).then((cache) => {
-                cache.put(event.request, copy);
-            });
-            return response;
+        caches.match(event.request).then(response => {
+            return response
         }).catch(() => {
-            return caches.match(event.request).then((response) => {
-                return response;
-            })
+            return fetch(event.request)
         })
+
     );
 });
