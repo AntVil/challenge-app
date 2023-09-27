@@ -1,4 +1,5 @@
 node_modules
 .vscode
-logs
+server/logs
+.idea
 other/venv

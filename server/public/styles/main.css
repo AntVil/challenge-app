@@ -1,19 +1,19 @@
-#leaderboard-screen:not(:checked)~aside {
-    transform: translate(-100%, 0);
+#main-screen:not(:checked)~main {
+    transform: translate(100%, 0);
     opacity: 0;
 }
 
-aside {
+main {
     display: grid;
-    grid-template-rows: auto 1fr;
-    gap: 55px;
+    grid-template-rows: auto 1fr auto;
+    gap: 15px;
     padding: 25px;
     width: 100%;
     height: 100%;
     background-color: var(--theme-color-3);
 }
 
-aside div {
+main div {
     display: grid;
     grid-template-columns: 30px 1fr 30px;
     justify-content: center;
@@ -21,58 +21,28 @@ aside div {
     text-align: center;
 }
 
-aside h1 {
-    font-size: 30px;
-}
-
-aside button,
-aside label {
-    display: block;
+main div label {
+    background-color: var(--theme-color-2);
     width: 30px;
     height: 30px;
-    background-color: var(--theme-color-2);
+    mask-image: url("images/arrow-left.svg");
+    -webkit-mask-image: url("images/arrow-left.svg");
     mask-repeat: no-repeat;
     -webkit-mask-repeat: no-repeat;
     mask-position: center;
     -webkit-mask-position: center;
 }
 
-aside button {
-    mask-image: url("./images/refresh.svg");
-    -webkit-mask-image: url("./images/refresh.svg");
-    transition: 1s;
+main h1 {
+    font-size: 30px;
 }
 
-/* reload animation */
-aside button:active {
-    transition: 0s;
-    transform: rotate(-360deg);
-}
-
-aside label {
-    mask-image: url("./images/arrow-right.svg");
-    -webkit-mask-image: url("./images/arrow-right.svg");
-}
-
-aside ol {
-    display: grid;
-    grid-auto-rows: min-content;
-    gap: 20px;
-    padding: 0;
+main section {
+    text-align: justify;
     overflow-y: auto;
-    background-color: var(--theme-color-3);
-    list-style: none;
 }
 
-aside li {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    padding: 10px;
-    background-color: var(--theme-color-2);
-    border-radius: 10px;
-}
-
-aside ol:empty {
+main section:empty {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,7 +50,7 @@ aside ol:empty {
 
 /* animation during loading */
 @media (prefers-reduced-motion: no-preference) {
-    aside ol:empty::after {
+    main section:empty::after {
         content: "";
         display: block;
         width: 64px;
@@ -103,7 +73,28 @@ aside ol:empty {
     }
 }
 
-aside ol:not(:has(*)) {
+main>label {
+    background-color: var(--theme-color-4);
+    border: 1px solid var(--theme-color-0);
+    border-radius: 5px;
+    color: var(--theme-color-0);
+    text-align: center;
+    padding: 1px;
+}
+
+#challenge-finish-popup-toggle:disabled~main>[for="challenge-finish-popup-toggle"] {
+    filter: grayscale(100%);
+}
+
+main>[for="setup-screen"] {
+    background-color: var(--theme-color-2);
+}
+
+main>[for="challenge-finish-popup-toggle"] {
+    background-color: var(--theme-color-4);
+}
+
+#challenge-finish-popup-toggle:disabled~main section {
     display: flex;
     justify-content: center;
     align-items: center;
