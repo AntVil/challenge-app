@@ -54,6 +54,8 @@ app.post("/complete", (req, res) => {
 });
 
 app.get("/locations", (req, res) => {
+    console.log("res: " + res);
+    console.log("req: " + req);
     res.send(locationManager.getLocations());
 });
 
