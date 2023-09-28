@@ -38,6 +38,9 @@ function getName() {
 }
 
 async function setupLocationOptions() {
+    let response = await fetch("/locations");
+    console.log(response);
+    
     let locations = await (await fetch("/locations")).json();
 
     for (let location of locations) {
