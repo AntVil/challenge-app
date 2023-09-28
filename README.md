@@ -8,7 +8,7 @@ npm i
 
 Run web-server
 ```zsh
-node server/index.js
+node server/app.js
 ```
 
 ## challenges
