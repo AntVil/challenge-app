@@ -5,6 +5,7 @@ import cors from "cors";
 import TeamTable from "./TeamTable.js";
 import LocationManager from "./LocationManager.js";
 import { PORT, PUBLIC_DIRECTORY, CHALLENGE_DIRECTORY, LOG_DIRECTORY } from "./constants.js";
+import fetch from 'node-fetch';
 
 const app = express();
 
@@ -54,8 +55,6 @@ app.post("/complete", (req, res) => {
 });
 
 app.get("/locations", (req, res) => {
-    console.log("hello world");
-    console.log(locationManager.getLocations());
     res.send(locationManager.getLocations());
 });
 
