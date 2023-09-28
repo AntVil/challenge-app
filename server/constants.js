@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 
 const CURRENT_DIRECTORY = path.dirname(fileURLToPath(import.meta.url))
 
-export const PORT = 80;
+export const PORT = 443;
 export const PUBLIC_DIRECTORY = path.join(CURRENT_DIRECTORY, "public")
 export const CHALLENGE_DIRECTORY = path.join(CURRENT_DIRECTORY, "challenges")
 export const LOG_DIRECTORY = path.join(CURRENT_DIRECTORY, "logs")
