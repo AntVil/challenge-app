@@ -10,6 +10,7 @@ const app = express();
 
 app.use(express.static(PUBLIC_DIRECTORY));
 app.use(express.json());
+app.use(cors());
 
 const teamTable = new TeamTable();
 const locationManager = new LocationManager(CHALLENGE_DIRECTORY)
