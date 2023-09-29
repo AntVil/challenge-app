@@ -10,6 +10,8 @@ const challengeFinishPopupToggle = document.getElementById("challenge-finish-pop
 const challengeText = document.getElementById("challenge-text");
 const leaderboardTable = document.getElementById("leaderboard-table");
 
+import fetch from 'node-fetch';
+
 window.onload = () => {
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./service-worker.js");
@@ -38,6 +40,9 @@ function getName() {
 }
 
 async function setupLocationOptions() {
+    let response = await fetch("/locations");
+    console.log(response);
+    
     let locations = await (await fetch("/locations")).json();
 
     for (let location of locations) {
