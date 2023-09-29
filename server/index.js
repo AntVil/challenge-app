@@ -1,6 +1,3 @@
-import fixEsm from "fix-esm";
-fixEsm.register();
-
 import fs from "fs";
 import path from "path";
 import express from "express";
@@ -9,7 +6,6 @@ import TeamTable from "./TeamTable.js";
 import LocationManager from "./LocationManager.js";
 import { PORT, PUBLIC_DIRECTORY, CHALLENGE_DIRECTORY, LOG_DIRECTORY } from "./constants.js";
 import fetch from 'node-fetch';
-
 
 const app = express();
 
