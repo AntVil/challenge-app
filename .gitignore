@@ -3,3 +3,4 @@ node_modules
 server/logs
 .idea
 other/venv
+.DS_Store
