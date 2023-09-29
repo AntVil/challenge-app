@@ -1,4 +1,4 @@
-# challenge-index
+# challenge-app
 
 ## setup
 Install dependencies
@@ -8,7 +8,7 @@ npm i
 
 Run web-server
 ```zsh
-node server/index.js
+node server/app.js
 ```
 
 ## challenges

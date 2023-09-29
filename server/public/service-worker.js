@@ -9,7 +9,7 @@ const filesToCache = [
     "/styles/images/arrow-left.svg",
     "/styles/images/arrow-right.svg",
     "/styles/images/refresh.svg",
-    "/scripts/index.js",
+    "/scripts/app.js",
     "/locations"
 ];
 
