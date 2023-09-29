@@ -1,3 +1,3 @@
 (async () => {
-    await import("./index.js");
+    await import("./app.js");
 })();
