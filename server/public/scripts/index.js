@@ -10,6 +10,8 @@ const challengeFinishPopupToggle = document.getElementById("challenge-finish-pop
 const challengeText = document.getElementById("challenge-text");
 const leaderboardTable = document.getElementById("leaderboard-table");
 
+import fetch from 'node-fetch';
+
 window.onload = () => {
     if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./service-worker.js");
