@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import express from "express";
-import cors from "cors";
 import TeamTable from "./TeamTable.js";
 import LocationManager from "./LocationManager.js";
 import { PORT, PUBLIC_DIRECTORY, CHALLENGE_DIRECTORY, LOG_DIRECTORY } from "./constants.js";
@@ -10,7 +9,6 @@ const app = express();
 
 app.use(express.static(PUBLIC_DIRECTORY));
 app.use(express.json());
-app.use(cors());
 
 const teamTable = new TeamTable();
 const locationManager = new LocationManager(CHALLENGE_DIRECTORY)
@@ -54,8 +52,6 @@ app.post("/complete", (req, res) => {
 });
 
 app.get("/locations", (req, res) => {
-    console.log("hello world");
-    console.log(locationManager.getLocations());
     res.send(locationManager.getLocations());
 });
 
